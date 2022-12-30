@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+
+body{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+    font-family: 'Roboto Mono', monospace;
+    background:  #323437;
+
+}
+main{
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+    font-family: 'Roboto Mono', monospace;
+    background:  #323437;
+
+}
+.words{
+    
+    color: #ed4d0e;
+    background: #1f2022;
+    width: 80vw;
+    margin-top: 30px;
+    /* height: 60vh; */
+    padding: 20px;
+    border-radius: 30px;
+}
+span{
+    /* background: #c1de97; */
+    font-family: 'Roboto Mono', monospace;
+    font-size: 40px;
+    padding: 5px;
+    margin: 5px 0;
+    border-radius: 10px;
+
+}
+input{
+    height: 60px;
+    font-size: 40px ;
+    color: #ed4d0e;
+    width: 70vw;
+    background: none;
+    border: none;
+    outline: none;
+    caret-shape: underscore;
+    background: #1f2022;
+    padding: 15px 25px;
+    caret-color: #ed4d0e;
+    caret-shape: block ;
+    font-family: 'Roboto Mono', monospace;
+    border-radius: 20px;
+}
+h1,h2,h3{
+    text-align: center;
+    font-family: 'Roboto Mono', monospace;
+    color: #ed4d0e;
+    margin: 0;
+    margin: 0 95px;
+}
+h1{
+    font-family: 'Roboto Mono', monospace;
+    display: block;
+    opacity: 0.8;
+}
+h3{
+    font-size: 25px;
+    opacity: 0.4;
+}
+h2{
+    font-size: 40px;
+    opacity: 0.5;
+}
+.calculation{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    align-items: center;
+    width: 100vw ;
+}
+button{
+    background: none;
+    border: none;
+    width: 60px;
+    height: 60px;
+    transition: .1s;
+}
+button:hover{
+    background: #1f2022;
+    
+    border-radius: 80%;
+    cursor: pointer;
+}
+button:active{
+    rotate: 180deg;
+}
+footer{
+    width: 100vw;
+    font-family: 'Roboto Mono', monospace;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 10px;
+    font-weight: 100;
+}
+img{
+    width: 50px;
+}
+h6{
+    font-weight: 100;
+    font-size: 12px;
+    color: #ed4d0e;
+}
+i{
+    color: grey;
+}
+a{
+    color: #ed4d0e;
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: underline;
+}
+
+
+
+
+
+@media(max-width:800px){
+    span{
+        font-size: 30px;
+    }
+    input{
+        font-size: 30px;
+    }
+}
