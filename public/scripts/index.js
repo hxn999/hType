@@ -92,13 +92,70 @@ var wordList = [
 'yard', 'yeah', 'year', 'yes', 'yet', 'you', 'young', 'your'];
 
 let words = [] // words which will be displayed
-
+let checkerWords = [] // words for validating
 
 //  shuffling random words
-let i1 = 0;
-while (i1 < 18) {
-  words.push(wordList[Math.floor(Math.random() * wordList.length)])
-  i1++
+function generateWord(){
+  let i1 = 0;
+  while (i1 < 30) {
+    words.push(wordList[Math.floor(Math.random() * wordList.length)])
+    checkerWords.push(wordList[Math.floor(Math.random() * wordList.length)])
+    i1++
+  }
+  // displaying all words in span through loop
+  let elemnt = '';
+  words.map(e => {
+    elemnt += `<span>${e}</span>
+      `
+  });
+  document.querySelector('.words').innerHTML = elemnt;
+}
+
+generateWord()
+
+// check end
+function checkEnd(value){
+  setInterval(() => {
+    if(sec == value){
+      clearInterval(timingF);
+      let time = parseInt(document.querySelector('.h2').innerText); // typing time
+      wpm(time, correct); // calculate wpm
+      document.querySelector('.h1').style.opacity = 0;
+      document.querySelector('.h2').style.opacity = 0;
+      document.querySelector('button').style.opacity = '1';
+      document.querySelector('#txt').style.transitionDuration = '.5s';
+      document.querySelector('#txt').style.opacity = 0;
+      document.querySelector('#txt').style.display = 'none';
+      document.querySelector('.wpm').style.display = 'block';
+      document.querySelector('.acc').style.display = 'block';
+      document.querySelector('.crct').style.display = 'block';
+      document.querySelector('.wrng').style.display = 'block';
+      document.querySelector('.w3').innerText = correct;
+      document.querySelector('.w4').innerText = wrong;
+      document.querySelector('.w2').innerText =`${Math.floor((correct/total)*100)}%`;
+    }
+  }, 500);
+}
+
+
+const radio1 = document.querySelector('#radio1')
+const radio2 = document.querySelector('#radio2')
+const radio3 = document.querySelector('#radio3')
+
+function checkLimit()  {
+  
+  if(radio1.checked == true){
+    checkEnd(15);
+    console.log(15);
+  }
+  if(radio2.checked == true){
+    checkEnd(30);
+    console.log(30);
+  }
+  if(radio3.checked == true){
+    checkEnd(60);
+    console.log(60);
+  }
 }
 
 
@@ -106,38 +163,32 @@ while (i1 < 18) {
 const inputGet = document.querySelector('#txt') // input
 
 let correct = 0 // correct word count
-
+let wrong = 0 // wrong word count
+let total = 0 // total words typed
 //  calculating typing time 
 
-let sec = 0;
+let sec = 1;
 function timer() {
 
   setInterval(() => {
     sec += 1;
-    document.querySelector('h2').innerText = sec;
+    document.querySelector('.h2').innerText = sec;
   }, 1300);
   // timer
 }
 
 
-let checkWord = [] // array of input text
 
-// displaying all words in span through loop
-let elemnt = '';
-words.map(e => {
-  elemnt += `<span>${e}</span>
-     `
-});
-document.querySelector('.words').innerHTML = elemnt;
+let checkWord = [] // array of input text
 
 let spanArr = document.querySelectorAll('span');
 
-
-
 // checking input text 
-
 function check(i) {
   if (checkWord[i] === words[i]) {
+    if(i===0){
+      spanArr[0].style.color = 'green';
+    }
     if (i > words.length - 3) {
       spanArr[i - 1].style.backgroundColor = '';
       spanArr[i].style.backgroundColor = 'rgba(177, 102, 102, 0.418)';
@@ -149,6 +200,9 @@ function check(i) {
 
     correct += 1;
   } else {
+    if(i===0){
+      spanArr[0].style.color = 'red';
+    }
     if (i > words.length - 3) {
       spanArr[i - 1].style.backgroundColor = '';
       spanArr[i].style.backgroundColor = 'rgba(177, 102, 102, 0.418)';
@@ -157,47 +211,65 @@ function check(i) {
       spanArr[i].style.backgroundColor = '';
     }
     spanArr[i].style.color = 'red';
-
+    wrong+=1
   }
 }
 
 // calculating words per minute(wpm)
-
 function wpm(time, crct) {
   let wpm = Math.ceil((crct / time) * 60);
-  document.querySelector('h1').innerHTML = `<i>WPM</i> || ${wpm}`
+  document.querySelector('.h1').innerHTML = `<i id="i">wpm</i> <i id="i2">${wpm}</i>`
+  document.querySelector('.w1').innerText = wpm;
 }
 
+const timingF = setInterval(() => {
+    wpm(sec ,correct)
+  }, 500);
 
 let i = 0;
+let ic = 0;
 let iv = ''; //  input value
 
 // matching input value with given words
 document.addEventListener('keydown', (e) => {
   if (e.key.toLowerCase() === ' ' && inputGet.value != ' ' && inputGet.value) {
-
-    if (i === 0) { // timer starts on first input
+    total +=1 ;
+    // timer starts on first input
+    if (i === 0 && ic === 0 ) { 
       timer()
+      checkLimit()
     }
 
     iv = inputGet.value;
-    if (i > 0) {
+    if (i > 0 || ic > 0) {
       iv = iv.slice(1);
     }
-    checkWord.push(iv) //  pushing input value in the array
+
+    //  pushing input value in the array
+    checkWord.push(iv) 
     inputGet.value = null;
+
+    // validating input value
     if (i < words.length) {
-      check(i)  // validating input value
+      console.log("ok");
+      check(i)  
     }
-    if (i > words.length - 2) { //  executes on the last word
-      let time = parseInt(document.querySelector('h2').innerText) // typing time
-      wpm(time, correct); // calculate wpm
-      document.querySelector('h2').style.display = 'none';
-      document.querySelector('h3').style.opacity = '1';
+
+    //  executes on the last word
+    if (i > words.length - 2) { 
+      words = [];
+      checkWord = []
+      generateWord();
+      i = -1
+      ic++
+      spanArr = document.querySelectorAll('span');
     }
+
+    // incrementing count
     i++
   }
 })
+
 
 
 

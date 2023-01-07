@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="description">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="image.png">
+    <title>hType</title>
+</head>
+
+<body>
+    <nav>
+        <h1><img src="image.png" alt="">
+            hType</h1>
+        <form action="">
+            <label id="l1" onclick="l1()" for="radio1">15s</label>
+            <label id="l2" onclick="l2()" for="radio2">30s</label>
+            <label id="l3" onclick="l3()" for="radio3">60s</label>
+            <input id="radio1" class="radio" type="radio" name="time-limit" value="15sec">
+            <input id="radio2" class="radio" type="radio" name="time-limit" value="30sec">
+            <input id="radio3" class="radio" type="radio" name="time-limit" value="60sec">
+        </form>
+    </nav>
+    <div class="calculation">
+        <div class="h1"><i id="i">wpm</i> <i id="i2">0</i></div>
+        <button onclick="refresh()">
+            <img src="https://img.icons8.com/color/128/null/synchronize--v1.png" alt="refresh" />
+        </button>
+        <div class="h2">0</div>
+    </div>
+    <main>
+        <p class="words">
+            <span>hello</span>
+
+        </p>
+        <div class="place">
+            <input type="text" class="inp" placeholder="type here" name="text" id="txt">
+            <div class="data wpm"><i id="w">wpm</i> <i  class="w1" id="wpm">81</i></div>
+            <div class="data acc"><i id="w">accuracy</i> <i  class="w2" id="wpm">97%</i></div>
+            <div class="data crct"><i id="w">correct</i> <i class="w3"  id="wpm">30</i></div>
+            <div class="data wrng"><i id="w">wrong</i> <i  class="w4" id="wpm">5</i></div>
+        </div>
+
+    </main>
+    <footer>
+        <div class="logo">
+            <h6>hType || <i>Copyright© 2023 Hasibul Hasan</i> || <a target="_blank"
+                    href="https://github.com/hxn999/hType">github</a></h6>
+        </div>
+    </footer>
+    <script src="./scripts/index.js"></script>
+    <script>
+        function refresh() {
+            window.location.reload(false);
+        };
+        const label1 = document.querySelector('#l1')
+        const label2 = document.querySelector('#l2')
+        const label3 = document.querySelector('#l3')
+        function l1() {
+            label1.style.color = '#1f2022';
+            label1.style.backgroundColor = '#ed4d0e';
+            label2.style.color = '#ed4d0e';
+            label2.style.backgroundColor = '#1f2022';
+            label3.style.color = '#ed4d0e';
+            label3.style.backgroundColor = '#1f2022';
+        }
+        function l2() {
+            label2.style.color = '#1f2022';
+            label2.style.backgroundColor = '#ed4d0e';
+            label1.style.color = '#ed4d0e';
+            label1.style.backgroundColor = '#1f2022';
+            label3.style.color = '#ed4d0e';
+            label3.style.backgroundColor = '#1f2022';
+        }
+        function l3() {
+            label3.style.color = '#1f2022';
+            label3.style.backgroundColor = '#ed4d0e';
+            label1.style.color = '#ed4d0e';
+            label1.style.backgroundColor = '#1f2022';
+            label2.style.color = '#ed4d0e';
+            label2.style.backgroundColor = '#1f2022';
+        }
+    </script>
+</body>
+
+</html>
