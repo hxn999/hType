@@ -185,7 +185,7 @@ let spanArr = document.querySelectorAll('span');
 
 // checking input text 
 function check(i) {
-  if (checkWord[i] === words[i]) {
+  if (checkWord[i].trim() === words[i]) {
     if(i===0){
       spanArr[0].style.color = 'green';
     }
@@ -232,7 +232,7 @@ let iv = ''; //  input value
 
 // matching input value with given words
 document.addEventListener('keydown', (e) => {
-  if (e.key.toLowerCase() === ' ' && inputGet.value != ' ' && inputGet.value) {
+  if (e.key.toLowerCase() === ' ' && inputGet.value.trim() != '' && inputGet.value) {
     total +=1 ;
     // timer starts on first input
     if (i === 0 && ic === 0 ) { 
